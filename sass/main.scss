@@ -1,0 +1,139 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+//FONTS _______________________________________
+$font-family-sans-serif: "Rubik", sans-serif;
+$h1-font-size: $font-size-base * 2.7;
+$custom-font-sizes: (
+  7: $font-size-base * 0.85,
+);
+
+//COLORS _______________________________________
+$primary: #5265e1;
+$secondary: #fa5959;
+$navy: #242946;
+
+$custom-colors: (
+  "navy": $navy,
+);
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+);
+
+//SIZE _______________________________________
+$custom-spacers: (
+  6: $spacer * 6.5,
+  herotop: $spacer * 9,
+);
+
+$custom-position-values: (
+  m13: -13%,
+  30: 30%,
+  2r: 2rem,
+  4r: 4rem,
+  5r: 5.5rem,
+);
+
+//NAVBAR _______________________________________
+.navbar {
+  width: 100%;
+}
+.navbar-collapse {
+  justify-content: flex-end;
+}
+.navbar-toggler-icon {
+  background-image: url(../images/icon-hamburger.svg);
+}
+.menudown {
+  z-index: 3000;
+}
+
+$dropdown-link-hover-bg: $white;
+
+$navbar-light-hover-color: $secondary;
+$navbar-dark-color: $white;
+$navbar-dark-hover-color: $secondary;
+$link-color: $white;
+$link-hover-color: $secondary;
+
+//HERO _________________________________________
+.screen {
+  z-index: 2000;
+}
+.bg-form {
+  width: 80%;
+  z-index: 1000;
+}
+
+//TAB COMPONENT _______________________________________
+$nav-link-color: $gray-600;
+$navbar-light-brand-hover-color: $secondary;
+$nav-tabs-link-active-border-color: transparent transparent $secondary
+  transparent;
+$nav-tabs-border-width: 3px;
+$nav-tabs-link-hover-border-color: transparent;
+
+//CARD COMPONENT ______________________________________
+
+$card-border-width: 0;
+$card-border-radius: 1.5rem;
+
+.logo {
+  width: 40%;
+}
+
+@for $i from 2 through 3 {
+  .card:nth-child(#{$i}) {
+    top: 1rem + $i - 2;
+  }
+}
+
+//ACCORDION COMPONENT ______________________________________
+$accordion-button-active-bg: transparent;
+$accordion-button-active-color: $body-color;
+.accordion-button:hover {
+  color: $secondary;
+}
+$accordion-icon-width: 1.5rem;
+$accordion-button-focus-box-shadow: none;
+// $accordion-button-icon: url(../images/icon-arrow.svg);
+$accordion-icon-color: $primary;
+$accordion-icon-active-color: $secondary;
+$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+$accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+
+//MQ _______________________________________
+@media (max-width: 767px) {
+  .my-tabs li {
+    width: 100%;
+  }
+  .card {
+    top: 0;
+  }
+}
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge(
+  $theme-colors-rgb,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-color),
+  )
+);
+
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  "$key",
+  "text"
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+$spacers: map-merge($custom-spacers, $spacers);
+$font-sizes: map-merge($custom-font-sizes, $font-sizes);
+$position-values: map-merge($custom-position-values, $position-values);
+@import "../node_modules/bootstrap/scss/bootstrap";
